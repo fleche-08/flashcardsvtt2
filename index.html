@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flashcards SVT 2</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px;
+        }
+        #cards-container {
+            display: flex;
+            flex-direction: column;
+            gap: 40px; /* Espace entre les cartes */
+        }
+        .card-container {
+            display: flex;
+            justify-content: center;
+            transition: transform 0.5s ease;
+        }
+        .card {
+            width: 200px;
+            height: 100px;
+            perspective: 1000px;
+        }
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        .card.flipped .card-inner {
+            transform: rotateY(180deg);
+        }
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .card-front {
+            background-color: #e0f7e0;
+        }
+        .card-back {
+            background-color: #b2ebf2;
+            transform: rotateY(180deg);
+        }
+        .card-violet {
+            background-color: #e1bee7;
+        }
+        .card-violet-back {
+            background-color: #d1c4e9;
+        }
+        button {
+            margin-top: 50px;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #6200ea;
+            color: white;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #3700b3;
+        }
+        .exercise-container {
+            margin-top: 50px;
+            width: 80%;
+            text-align: left;
+        }
+        .exercise-container p {
+            font-size: 18px;
+        }
+        .exercise-container input {
+            width: 60%;
+            padding: 5px;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        .exercise-container button {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Flashcards SVT 2</h1>
+
+<!-- Cartes -->
+<div id="cards-container">
+    <div class="card-container">
+        <div class="card" onclick="this.classList.toggle('flipped');">
+            <div class="card-inner">
+                <div class="card-front">Altération physique</div>
+                <div class="card-back">Désagrégation d'une roche sous l'effet de facteurs physiques, comme la variation de température.</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-container">
+        <div class="card" onclick="this.classList.toggle('flipped');">
+            <div class="card-inner">
+                <div class="card-front">Altération chimique</div>
+                <div class="card-back">Désagrégation d'une roche par des transformations chimiques, comme l'hydrolyse.</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-container">
+        <div class="card" onclick="this.classList.toggle('flipped');">
+            <div class="card-inner">
+                <div class="card-front">Hydrolyse</div>
+                <div class="card-back">Transformation chimique des minéraux d'une roche par fixation d'eau.</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-container">
+        <div class="card" onclick="this.classList.toggle('flipped');">
+            <div class="card-inner">
+                <div class="card-front">Minéral</div>
+                <div class="card-back">Substance solide, cristallisée, avec une composition chimique définie.</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-container">
+        <div class="card" onclick="this.classList.toggle('flipped');">
+            <div class="card-inner">
+                <div class="card-front card-violet">Actualisme</div>
+                <div class="card-back card-violet-back">Principe selon lequel les phénomènes géologiques actuels sont les mêmes que ceux du passé.</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-container">
+        <div class="card" onclick="this.classList.toggle('flipped');">
+            <div class="card-inner">
+                <div class="card-front card-violet">Roches sédimentaires détritiques</div>
+                <div class="card-back card-violet-back">Roches composées de sédiments détritiques issus de l'érosion des continents.</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-container">
+        <div class="card" onclick="this.classList.toggle('flipped');">
+            <div class="card-inner">
+                <div class="card-front card-violet">Sédiments</div>
+                <div class="card-back card-violet-back">Particules solides issues de l'érosion qui se déposent.</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-container">
+        <div class="card" onclick="this.classList.toggle('flipped');">
+            <div class="card-inner">
+                <div class="card-front card-violet">Liant</div>
+                <div class="card-back card-violet-back">Ciment naturel qui lie les sédiments détritiques.</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bouton Mélanger -->
+<button onclick="shuffleCards()">Mélanger</button>
+
+<!-- Exercice -->
+<div class="exercise-container">
+    <h2>Exercice : Complétez les définitions</h2>
+    <p><strong>Altération physique :</strong> <input type="text" id="altération-physique"></p>
+    <p><strong>Altération chimique :</strong> <input type="text" id="altération-chimique"></p>
+    <p><strong>Hydrolyse :</strong> <input type="text" id="hydrolyse"></p>
+    <p><strong>Minéral :</strong> <input type="text" id="minéral"></p>
+    <p><strong>Actualisme :</strong> <input type="text" id="actualisme"></p>
+    <p><strong>Roches sédimentaires détritiques :</strong> <input type="text" id="roches-sédimentaires"></p>
+    <p><strong>Sédiments :</strong> <input type="text" id="sédiments"></p>
+    <p><strong>Liant :</strong> <input type="text" id="liant"></p>
+    <button onclick="checkAnswers()">Vérifier</button>
+    <p id="result"></p>
+</div>
+
+<script>
+    function shuffleCards() {
+        const container = document.getElementById("cards-container");
+        const cards = Array.from(container.children);
+
+        for (let i = cards.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [cards[i], cards[j]] = [cards[j], cards[i]];
+        }
+
+        container.style.transition = "transform 0.5s ease";
+        container.style.transform = "scale(0.95)";
+
+        setTimeout(() => {
+            container.innerHTML = '';
+            cards.forEach(card => container.appendChild(card));
+            container.style.transform = "scale(1)";
+        }, 500);
+    }
+
+    function checkAnswers() {
+        let score = 0;
+        const answers = {
+            "altération-physique": "Désagrégation d'une roche sous l'effet de facteurs physiques, comme la variation de température.",
+            "altération-chimique": "Désagrégation d'une roche par des transformations chimiques, comme l'hydrolyse.",
+            "hydrolyse": "Transformation chimique des minéraux d'une roche par fixation d'eau.",
+            "minéral": "Substance solide, cristallisée, avec une composition chimique définie.",
+            "actualisme": "Principe selon lequel les phénomènes géologiques actuels sont les mêmes que ceux du passé.",
+            "roches-sédimentaires": "Roches composées de sédiments détritiques issus de l'érosion des continents.",
+            "sédiments": "Particules solides issues de l'érosion qui se déposent.",
+            "liant": "Ciment naturel qui lie les sédiments détritiques."
+        };
+
+        for (let key in answers) {
+            const userAnswer = document.getElementById(key).value.trim().toLowerCase();
+            if (userAnswer === answers[key].toLowerCase()) {
+                score++;
+            }
+        }
+
+        const result = document.getElementById("result");
+        result.textContent = `Vous avez ${score}/8 bonnes réponses !`;
+    }
+</script>
+
+</body>
+</html>
