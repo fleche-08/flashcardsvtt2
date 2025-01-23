@@ -3,28 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flashcards SVT 2</title>
+    <title>Flashcards Espagnol</title>
+    
+    <!-- Importation de la police Roboto -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Roboto', sans-serif;
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin: 20px;
-        }
-        #cards-container {
-            display: flex;
-            flex-direction: column;
-            gap: 40px; /* Espace entre les cartes */
-        }
-        .card-container {
-            display: flex;
+            flex-wrap: wrap;
             justify-content: center;
-            transition: transform 0.5s ease;
+            background-color: #1a1a2e; /* bleu foncé */
+            color: white; /* couleur du texte par défaut */
+            padding: 20px;
         }
         .card {
-            width: 200px;
-            height: 100px;
+            width: 220px;
+            height: 120px;
+            margin: 15px;
             perspective: 1000px;
         }
         .card-inner {
@@ -33,11 +30,12 @@
             height: 100%;
             transition: transform 0.6s;
             transform-style: preserve-3d;
+            cursor: pointer;
         }
-        .card.flipped .card-inner {
+        .card-inner.clicked {
             transform: rotateY(180deg);
         }
-        .card-front, .card-back {
+        .card-face {
             position: absolute;
             width: 100%;
             height: 100%;
@@ -45,198 +43,378 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 10px;
+            font-size: 1.5em;
+            border-radius: 15px;
             padding: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-        .card-front {
-            background-color: #e0f7e0;
-        }
-        .card-back {
-            background-color: #b2ebf2;
-            transform: rotateY(180deg);
-        }
-        .card-violet {
-            background-color: #e1bee7;
-        }
-        .card-violet-back {
-            background-color: #d1c4e9;
-        }
-        button {
-            margin-top: 50px;
-            padding: 10px 20px;
-            font-size: 16px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            background-color: #6200ea;
-            color: white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
             transition: background-color 0.3s;
         }
-        button:hover {
-            background-color: #3700b3;
+        .front {
+            background-color: #D8BFD8; /* violet pâle */
         }
-        .exercise-container {
-            margin-top: 50px;
-            width: 80%;
-            text-align: left;
+        .back {
+            background-color: #ADD8E6; /* bleu */
+            transform: rotateY(180deg);
         }
-        .exercise-container p {
-            font-size: 18px;
+        
+        /* Styles pour l'exercice */
+        .exercise {
+            margin-top: 40px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
-        .exercise-container input {
-            width: 60%;
+        .exercise-card {
+            background-color: #D8BFD8; /* violet pâle */
+            width: 220px;
+            height: 120px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 15px;
+            color: white;
+            font-size: 1.5em;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            margin: 15px;
+            padding: 10px;
+        }
+        .result-text {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.2em;
+            visibility: hidden;
+        }
+        input {
+            margin-top: 10px;
+            width: 200px;
             padding: 5px;
-            font-size: 16px;
-            margin-bottom: 10px;
-        }
-        .exercise-container button {
-            margin-top: 20px;
+            border-radius: 5px;
+            border: none;
         }
     </style>
 </head>
 <body>
 
-<h1>Flashcards SVT 2</h1>
-
-<!-- Cartes -->
-<div id="cards-container">
-    <div class="card-container">
-        <div class="card" onclick="this.classList.toggle('flipped');">
-            <div class="card-inner">
-                <div class="card-front">Altération physique</div>
-                <div class="card-back">Désagrégation d'une roche sous l'effet de facteurs physiques, comme la variation de température.</div>
-            </div>
-        </div>
+<!-- Cartes Violet Pâle -->
+<div class="card" onclick="this.querySelector('.card-inner').classList.toggle('clicked')">
+    <div class="card-inner">
+        <div class="card-face front">un smartphone</div>
+        <div class="card-face back">un movil inteligente</div>
     </div>
-
-    <div class="card-container">
-        <div class="card" onclick="this.classList.toggle('flipped');">
-            <div class="card-inner">
-                <div class="card-front">Altération chimique</div>
-                <div class="card-back">Désagrégation d'une roche par des transformations chimiques, comme l'hydrolyse.</div>
-            </div>
-        </div>
+</div>
+<div class="card" onclick="this.querySelector('.card-inner').classList.toggle('clicked')">
+    <div class="card-inner">
+        <div class="card-face front">un écran</div>
+        <div class="card-face back">una pantalla</div>
     </div>
-
-    <div class="card-container">
-        <div class="card" onclick="this.classList.toggle('flipped');">
-            <div class="card-inner">
-                <div class="card-front">Hydrolyse</div>
-                <div class="card-back">Transformation chimique des minéraux d'une roche par fixation d'eau.</div>
-            </div>
-        </div>
+</div>
+<div class="card" onclick="this.querySelector('.card-inner').classList.toggle('clicked')">
+    <div class="card-inner">
+        <div class="card-face front">les réseaux sociaux</div>
+        <div class="card-face back">las redes sociales</div>
     </div>
-
-    <div class="card-container">
-        <div class="card" onclick="this.classList.toggle('flipped');">
-            <div class="card-inner">
-                <div class="card-front">Minéral</div>
-                <div class="card-back">Substance solide, cristallisée, avec une composition chimique définie.</div>
-            </div>
-        </div>
+</div>
+<div class="card" onclick="this.querySelector('.card-inner').classList.toggle('clicked')">
+    <div class="card-inner">
+        <div class="card-face front">un fossé</div>
+        <div class="card-face back">una brecha</div>
     </div>
-
-    <div class="card-container">
-        <div class="card" onclick="this.classList.toggle('flipped');">
-            <div class="card-inner">
-                <div class="card-front card-violet">Actualisme</div>
-                <div class="card-back card-violet-back">Principe selon lequel les phénomènes géologiques actuels sont les mêmes que ceux du passé.</div>
-            </div>
-        </div>
+</div>
+<div class="card" onclick="this.querySelector('.card-inner').classList.toggle('clicked')">
+    <div class="card-inner">
+        <div class="card-face front">engagé</div>
+        <div class="card-face back">comprometido</div>
     </div>
-
-    <div class="card-container">
-        <div class="card" onclick="this.classList.toggle('flipped');">
-            <div class="card-inner">
-                <div class="card-front card-violet">Roches sédimentaires détritiques</div>
-                <div class="card-back card-violet-back">Roches composées de sédiments détritiques issus de l'érosion des continents.</div>
-            </div>
-        </div>
+</div>
+<div class="card" onclick="this.querySelector('.card-inner').classList.toggle('clicked')">
+    <div class="card-inner">
+        <div class="card-face front">indépendant</div>
+        <div class="card-face back">autonomo</div>
     </div>
-
-    <div class="card-container">
-        <div class="card" onclick="this.classList.toggle('flipped');">
-            <div class="card-inner">
-                <div class="card-front card-violet">Sédiments</div>
-                <div class="card-back card-violet-back">Particules solides issues de l'érosion qui se déposent.</div>
-            </div>
-        </div>
+</div>
+<div class="card" onclick="this.querySelector('.card-inner').classList.toggle('clicked')">
+    <div class="card-inner">
+        <div class="card-face front">isolé</div>
+        <div class="card-face back">aislada</div>
     </div>
-
-    <div class="card-container">
-        <div class="card" onclick="this.classList.toggle('flipped');">
-            <div class="card-inner">
-                <div class="card-front card-violet">Liant</div>
-                <div class="card-back card-violet-back">Ciment naturel qui lie les sédiments détritiques.</div>
-            </div>
-        </div>
+</div>
+<div class="card" onclick="this.querySelector('.card-inner').classList.toggle('clicked')">
+    <div class="card-inner">
+        <div class="card-face front">être très occupé</div>
+        <div class="card-face back">estay muy ajetreado</div>
+    </div>
+</div>
+<div class="card" onclick="this.querySelector('.card-inner').classList.toggle('clicked')">
+    <div class="card-inner">
+        <div class="card-face front">naviguer</div>
+        <div class="card-face back">navegar</div>
+    </div>
+</div>
+<div class="card" onclick="this.querySelector('.card-inner').classList.toggle('clicked')">
+    <div class="card-inner">
+        <div class="card-face front">se disputer</div>
+        <div class="card-face back">discutir</div>
+    </div>
+</div>
+<div class="card" onclick="this.querySelector('.card-inner').classList.toggle('clicked')">
+    <div class="card-inner">
+        <div class="card-face front">suffer</div>
+        <div class="card-face back">padeceder</div>
+    </div>
+</div>
+<div class="card" onclick="this.querySelector('.card-inner').classList.toggle('clicked')">
+    <div class="card-inner">
+        <div class="card-face front">face à face</div>
+        <div class="card-face back">cara a cara</div>
     </div>
 </div>
 
-<!-- Bouton Mélanger -->
-<button onclick="shuffleCards()">Mélanger</button>
+<!-- Cartes Bleu -->
+<div class="card" onclick="this.querySelector('.card-inner').classList.toggle('clicked')">
+    <div class="card-inner">
+        <div class="card-face front">être addict à</div>
+        <div class="card-face back">ser adicto a</div>
+    </div>
+</div>
+<div class="card" onclick="this.querySelector('.card-inner').classList.toggle('clicked')">
+    <div class="card-inner">
+        <div class="card-face front">accro</div>
+        <div class="card-face back">enganchado</div>
+    </div>
+</div>
+
+<!-- Cartes Vert -->
+<div class="card" onclick="this.querySelector('.card-inner').classList.toggle('clicked')">
+    <div class="card-inner">
+        <div class="card-face front">les racines</div>
+        <div class="card-face back">las raices</div>
+    </div>
+</div>
+<div class="card" onclick="this.querySelector('.card-inner').classList.toggle('clicked')">
+    <div class="card-inner">
+        <div class="card-face front">les branches</div>
+        <div class="card-face back">las ramas</div>
+    </div>
+</div>
+<div class="card" onclick="this.querySelector('.card-inner').classList.toggle('clicked')">
+    <div class="card-inner">
+        <div class="card-face front">le fils</div>
+        <div class="card-face back">el hijo</div>
+    </div>
+</div>
+<div class="card" onclick="this.querySelector('.card-inner').classList.toggle('clicked')">
+    <div class="card-inner">
+        <div class="card-face front">un défi</div>
+        <div class="card-face back">un reto</div>
+    </div>
+</div>
+<div class="card" onclick="this.querySelector('.card-inner').classList.toggle('clicked')">
+    <div class="card-inner">
+        <div class="card-face front">les déchets</div>
+        <div class="card-face back">los desechos</div>
+    </div>
+</div>
+<div class="card" onclick="this.querySelector('.card-inner').classList.toggle('clicked')">
+    <div class="card-inner">
+        <div class="card-face front">l'environnement</div>
+        <div class="card-face back">el medio ambiente</div>
+    </div>
+</div>
+<div class="card" onclick="this.querySelector('.card-inner').classList.toggle('clicked')">
+    <div class="card-inner">
+        <div class="card-face front">durable</div>
+        <div class="card-face back">sostenible</div>
+    </div>
+</div>
+<div class="card" onclick="this.querySelector('.card-inner').classList.toggle('clicked')">
+    <div class="card-inner">
+        <div class="card-face front">voyant</div>
+        <div class="card-face back">ostenible</div>
+    </div>
+</div>
+<div class="card" onclick="this.querySelector('.card-inner').classList.toggle('clicked')">
+    <div class="card-inner">
+        <div class="card-face front">lancer le filet de pêche</div>
+        <div class="card-face back">echar la red</div>
+    </div>
+</div>
+<div class="card" onclick="this.querySelector('.card-inner').classList.toggle('clicked')">
+    <div class="card-inner">
+        <div class="card-face front">ajouter</div>
+        <div class="card-face back">sumar</div>
+    </div>
+</div>
+<div class="card" onclick="this.querySelector('.card-inner').classList.toggle('clicked')">
+    <div class="card-inner">
+        <div class="card-face front">la protection de l'environnement</div>
+        <div class="card-face back">proteger el medio ambiente</div>
+    </div>
+</div>
+<div class="card" onclick="this.querySelector('.card-inner').classList.toggle('clicked')">
+    <div class="card-inner">
+        <div class="card-face front">se joindre à une action</div>
+        <div class="card-face back">apuntarse a una accion</div>
+    </div>
+</div>
+
+<!-- Cartes Bleu Pâle -->
+<div class="card" onclick="this.querySelector('.card-inner').classList.toggle('clicked')">
+    <div class="card-inner">
+        <div class="card-face front">joli</div>
+        <div class="card-face back">bonito</div>
+    </div>
+</div>
+<div class="card" onclick="this.querySelector('.card-inner').classList.toggle('clicked')">
+    <div class="card-inner">
+        <div class="card-face front">confortable</div>
+        <div class="card-face back">comodo</div>
+    </div>
+</div>
+<div class="card" onclick="this.querySelector('.card-inner').classList.toggle('clicked')">
+    <div class="card-inner">
+        <div class="card-face front">de bonne qualité</div>
+        <div class="card-face back">bueno</div>
+    </div>
+</div>
+<div class="card" onclick="this.querySelector('.card-inner').classList.toggle('clicked')">
+    <div class="card-inner">
+        <div class="card-face front">j'adore</div>
+        <div class="card-face back">me encanta</div>
+    </div>
+</div>
+<div class="card" onclick="this.querySelector('.card-inner').classList.toggle('clicked')">
+    <div class="card-inner">
+        <div class="card-face front">je préfère</div>
+        <div class="card-face back">prefiero</div>
+    </div>
+</div>
+<div class="card" onclick="this.querySelector('.card-inner').classList.toggle('clicked')">
+    <div class="card-inner">
+        <div class="card-face front">de plus en plus</div>
+        <div class="card-face back">cada vez más</div>
+    </div>
+</div>
+
+<!-- Cartes Fluo -->
+<div class="card" onclick="this.querySelector('.card-inner').classList.toggle('clicked')">
+    <div class="card-inner">
+        <div class="card-face front">les emballages</div>
+        <div class="card-face back">los envases</div>
+    </div>
+</div>
+<div class="card" onclick="this.querySelector('.card-inner').classList.toggle('clicked')">
+    <div class="card-inner">
+        <div class="card-face front">en vrac</div>
+        <div class="card-face back">el granel</div>
+    </div>
+</div>
+<div class="card" onclick="this.querySelector('.card-inner').classList.toggle('clicked')">
+    <div class="card-inner">
+        <div class="card-face front">pollué</div>
+        <div class="card-face back">contamina</div>
+    </div>
+</div>
+<div class="card" onclick="this.querySelector('.card-inner').classList.toggle('clicked')">
+    <div class="card-inner">
+        <div class="card-face front">respect</div>
+        <div class="card-face back">respeta</div>
+    </div>
+</div>
 
 <!-- Exercice -->
-<div class="exercise-container">
-    <h2>Exercice : Complétez les définitions</h2>
-    <p><strong>Altération physique :</strong> <input type="text" id="altération-physique"></p>
-    <p><strong>Altération chimique :</strong> <input type="text" id="altération-chimique"></p>
-    <p><strong>Hydrolyse :</strong> <input type="text" id="hydrolyse"></p>
-    <p><strong>Minéral :</strong> <input type="text" id="minéral"></p>
-    <p><strong>Actualisme :</strong> <input type="text" id="actualisme"></p>
-    <p><strong>Roches sédimentaires détritiques :</strong> <input type="text" id="roches-sédimentaires"></p>
-    <p><strong>Sédiments :</strong> <input type="text" id="sédiments"></p>
-    <p><strong>Liant :</strong> <input type="text" id="liant"></p>
-    <button onclick="checkAnswers()">Vérifier</button>
-    <p id="result"></p>
+<div class="exercise">
+    <h2>Essayez de compléter les mots en espagnol :</h2>
+    <div id="exerciseCard" class="exercise-card"></div>
+    <input type="text" id="answer" placeholder="Entrez votre réponse ici" />
 </div>
 
 <script>
-    function shuffleCards() {
-        const container = document.getElementById("cards-container");
-        const cards = Array.from(container.children);
+    const cards = [
+        { fr: "un smartphone", es: "un movil inteligente" },
+        { fr: "un écran", es: "una pantalla" },
+        { fr: "les réseaux sociaux", es: "las redes sociales" },
+        { fr: "un fossé", es: "una brecha" },
+        { fr: "engagé", es: "comprometido" },
+        { fr: "indépendant", es: "autonomo" },
+        { fr: "isolé", es: "aislada" },
+        { fr: "être très occupé", es: "estay muy ajetreado" },
+        { fr: "naviguer", es: "navegar" },
+        { fr: "se disputer", es: "discutir" },
+        { fr: "suffer", es: "padeceder" },
+        { fr: "face à face", es: "cara a cara" },
+        { fr: "être addict à", es: "ser adicto a" },
+        { fr: "accro", es: "enganchado" },
+        { fr: "les racines", es: "las raices" },
+        { fr: "les branches", es: "las ramas" },
+        { fr: "le fils", es: "el hijo" },
+        { fr: "un défi", es: "un reto" },
+        { fr: "les déchets", es: "los desechos" },
+        { fr: "l'environnement", es: "el medio ambiente" },
+        { fr: "durable", es: "sostenible" },
+        { fr: "voyant", es: "ostenible" },
+        { fr: "lancer le filet de pêche", es: "echar la red" },
+        { fr: "ajouter", es: "sumar" },
+        { fr: "la protection de l'environnement", es: "proteger el medio ambiente" },
+        { fr: "se joindre à une action", es: "apuntarse a una accion" },
+        { fr: "joli", es: "bonito" },
+        { fr: "confortable", es: "comodo" },
+        { fr: "de bonne qualité", es: "bueno" },
+        { fr: "j'adore", es: "me encanta" },
+        { fr: "je préfère", es: "prefiero" },
+        { fr: "de plus en plus", es: "cada vez más" },
+        { fr: "les emballages", es: "los envases" },
+        { fr: "en vrac", es: "el granel" },
+        { fr: "pollué", es: "contamina" },
+        { fr: "respect", es: "respeta" }
+    ];
 
-        for (let i = cards.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [cards[i], cards[j]] = [cards[j], cards[i]];
-        }
-
-        container.style.transition = "transform 0.5s ease";
-        container.style.transform = "scale(0.95)";
-
-        setTimeout(() => {
-            container.innerHTML = '';
-            cards.forEach(card => container.appendChild(card));
-            container.style.transform = "scale(1)";
-        }, 500);
+    let currentCardIndex = Math.floor(Math.random() * cards.length);
+    
+    function displayExerciseCard() {
+        const exerciseDiv = document.getElementById('exerciseCard');
+        exerciseDiv.innerHTML = cards[currentCardIndex].fr; // Afficher le mot en français  
+        document.getElementById('answer').value = ''; // Réinitialiser le champ de réponse  
+        document.getElementById('answer').focus(); // Mettre le focus sur le champ de réponse  
     }
 
-    function checkAnswers() {
-        let score = 0;
-        const answers = {
-            "altération-physique": "Désagrégation d'une roche sous l'effet de facteurs physiques, comme la variation de température.",
-            "altération-chimique": "Désagrégation d'une roche par des transformations chimiques, comme l'hydrolyse.",
-            "hydrolyse": "Transformation chimique des minéraux d'une roche par fixation d'eau.",
-            "minéral": "Substance solide, cristallisée, avec une composition chimique définie.",
-            "actualisme": "Principe selon lequel les phénomènes géologiques actuels sont les mêmes que ceux du passé.",
-            "roches-sédimentaires": "Roches composées de sédiments détritiques issus de l'érosion des continents.",
-            "sédiments": "Particules solides issues de l'érosion qui se déposent.",
-            "liant": "Ciment naturel qui lie les sédiments détritiques."
-        };
+    function checkAnswer(event) {
+        if (event.key === 'Enter') {
+            const answerInput = document.getElementById('answer');
+            const userAnswer = answerInput.value.trim().toLowerCase();
+            const correctAnswer = cards[currentCardIndex].es.toLowerCase();
+            
+            const exerciseDiv = document.getElementById('exerciseCard');
+            const resultText = document.createElement('div');
+            resultText.className = 'result-text';
 
-        for (let key in answers) {
-            const userAnswer = document.getElementById(key).value.trim().toLowerCase();
-            if (userAnswer === answers[key].toLowerCase()) {
-                score++;
+            if (userAnswer === correctAnswer) {
+                exerciseDiv.style.transition = 'opacity 1s';
+                exerciseDiv.style.opacity = '0'; // Fade out  
+                setTimeout(() => {
+                    currentCardIndex = Math.floor(Math.random() * cards.length);
+                    displayExerciseCard();
+                }, 1000); // Wait for fade out before showing new card  
+            } else {
+                exerciseDiv.style.backgroundColor = 'red'; // Change to red for incorrect answer  
+                resultText.textContent = `Réponse correcte: ${cards[currentCardIndex].es}`;
+                resultText.style.visibility = 'visible'; // Show the result text  
+                exerciseDiv.appendChild(resultText);
+                setTimeout(() => {
+                    exerciseDiv.style.backgroundColor = '#D8BFD8'; // Reset background color  
+                    resultText.remove(); // Remove the result text  
+                }, 3000); // Wait 3 seconds before resetting  
             }
+            answerInput.value = ''; // Clear the input  
         }
-
-        const result = document.getElementById("result");
-        result.textContent = `Vous avez ${score}/8 bonnes réponses !`;
     }
+
+    // Display the first card when the page loads  
+    displayExerciseCard();
+    document.getElementById('answer').addEventListener('keydown', checkAnswer);
 </script>
 
 </body>
