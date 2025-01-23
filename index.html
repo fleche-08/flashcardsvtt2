@@ -12,16 +12,17 @@
         body {
             font-family: 'Roboto', sans-serif;
             display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
+            flex-direction: column; /* Alignement en colonne */
+            align-items: center; /* Centrer le contenu */
             background-color: #000000; /* bleu foncé */
             color: white; /* couleur du texte par défaut */
             padding: 20px;
         }
         .card {
-            width: 220px;
+            width: 90%; /* Utilisation du pourcentage pour s'adapter aux petits écrans */
+            max-width: 300px; /* Limite la largeur pour les écrans plus larges */
             height: 120px;
-            margin: 15px;
+            margin: 15px 0; /* Espace entre les cartes */
             perspective: 1000px;
         }
         .card-inner {
@@ -50,10 +51,10 @@
             transition: background-color 0.3s;
         }
         .front {
-            background-color: ##6353ec; /* violet pâle */
+            background-color: #ADD8E6; /* bleu pâle avant la rotation */
         }
         .back {
-            background-color: #ADD8E6; /* bleu */
+            background-color: #90EE90; /* vert pâle après la rotation */
             transform: rotateY(180deg);
         }
         
@@ -66,8 +67,9 @@
             align-items: center;
         }
         .exercise-card {
-            background-color: ##6353ec; /* violet pâle */
-            width: 220px;
+            background-color: #ADD8E6; /* bleu pâle */
+            width: 90%; /* Utilisation du pourcentage pour s'adapter aux petits écrans */
+            max-width: 300px; /* Limite la largeur pour les écrans plus larges */
             height: 120px;
             display: flex;
             justify-content: center;
@@ -77,7 +79,7 @@
             font-size: 1.5em;
             position: relative;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-            margin: 15px;
+            margin: 15px 0; /* Espace entre les cartes */
             padding: 10px;
         }
         .result-text {
@@ -90,7 +92,8 @@
         }
         input {
             margin-top: 10px;
-            width: 200px;
+            width: 90%; /* Utilisation du pourcentage pour s'adapter aux petits écrans */
+            max-width: 200px; /* Limite la largeur pour les écrans plus larges */
             padding: 5px;
             border-radius: 5px;
             border: none;
@@ -99,7 +102,7 @@
 </head>
 <body>
 
-<!-- Cartes Violet Pâle -->
+<!-- Cartes -->
 <div class="card" onclick="this.querySelector('.card-inner').classList.toggle('clicked')">
     <div class="card-inner">
         <div class="card-face front">un smartphone</div>
@@ -172,8 +175,6 @@
         <div class="card-face back">cara a cara</div>
     </div>
 </div>
-
-<!-- Cartes Bleu -->
 <div class="card" onclick="this.querySelector('.card-inner').classList.toggle('clicked')">
     <div class="card-inner">
         <div class="card-face front">être addict à</div>
@@ -186,8 +187,6 @@
         <div class="card-face back">enganchado</div>
     </div>
 </div>
-
-<!-- Cartes Vert -->
 <div class="card" onclick="this.querySelector('.card-inner').classList.toggle('clicked')">
     <div class="card-inner">
         <div class="card-face front">les racines</div>
@@ -404,7 +403,7 @@
                 resultText.style.visibility = 'visible'; // Show the result text  
                 exerciseDiv.appendChild(resultText);
                 setTimeout(() => {
-                    exerciseDiv.style.backgroundColor = '#D8BFD8'; // Reset background color  
+                    exerciseDiv.style.backgroundColor = '#ADD8E6'; // Reset background color  
                     resultText.remove(); // Remove the result text  
                 }, 3000); // Wait 3 seconds before resetting  
             }
